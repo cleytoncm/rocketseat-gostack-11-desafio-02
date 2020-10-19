@@ -37,7 +37,7 @@ app.put("/repositories/:id", (request, response) => {
   const repositoryIndex = repositories.findIndex(repository => repository.id === id);
 
   if (repositoryIndex < 0) {
-    return response.status(400).json({ error: 'Project not fount' });
+    return response.status(400).json({ error: 'Repositoy does not exist' });
   }
 
   if (title !== '') {
@@ -61,10 +61,10 @@ app.delete("/repositories/:id", (request, response) => {
   const repositoryIndex = repositories.findIndex(repository => repository.id === id);
 
   if (repositoryIndex < 0) {
-    return response.status(400).json({ error: 'Project not fount' });
+    return response.status(400).json({ error: 'Repositoy does not exists' });
   }
 
-  repositories.slice(repositoryIndex, 1);
+  repositories.splice(repositoryIndex, 1);
 
   return response.status(204).send();
 });
@@ -75,12 +75,12 @@ app.post("/repositories/:id/like", (request, response) => {
   const repositoryIndex = repositories.findIndex(repository => repository.id === id);
 
   if (repositoryIndex < 0) {
-    return response.status(400).json({ error: 'Project not fount' });
+    return response.status(400).json({ error: 'Repositoy does not exist' });
   }
 
   repositories[repositoryIndex].likes++;
 
-  return response.json(repositories[repositoryIndex].likes);
+  return response.json(repositories[repositoryIndex]);
 });
 
 module.exports = app;
